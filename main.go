@@ -1,11 +1,11 @@
 package main
 
 import (
+	firebase "firebase.google.com/go/v4"
+	"fmt"
 	"git-reminder/server/api/user"
 	"git-reminder/server/firebaseapp"
 	"git-reminder/server/middleware"
-	firebase "firebase.google.com/go/v4"
-	"fmt"
 	log "github.com/sirupsen/logrus"
 	"google.golang.org/api/option"
 	"net/http"

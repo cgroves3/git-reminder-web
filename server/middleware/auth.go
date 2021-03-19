@@ -1,8 +1,9 @@
 package middleware
 
 import (
+	"git-reminder/server/data"
 	"git-reminder/server/firebaseapp"
-	"git-reminder/server/error"
+	"git-reminder/server/jsonerror"
 	"encoding/json"
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/net/context"
@@ -15,13 +16,8 @@ type AuthHandler struct {
 	handler http.Handler
 }
 
-func isIn(target string, array []string) bool {
-	for _, data := range array {
-		if data == target {
-			return true
-		}
-	}
-	return false
+func (aH *AuthHandler) GetTokenHeader() string {
+	return "user-token"
 }
 
 func (aH *AuthHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -35,25 +31,25 @@ func (aH *AuthHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	authHeader := r.Header.Get("Authorization")
 	if authHeader == "" {
 		w.WriteHeader(http.StatusUnauthorized)
-		json.NewEncoder(w).Encode(error.JsonError{ErrorMessage: "Missing Authorization header"})
+		json.NewEncoder(w).Encode(jsonerror.Error{ErrorMessage: "Missing Authorization header"})
 	}
 	splitHeader := strings.Split(authHeader, " ")
 	scheme := splitHeader[0]
-	if isIn(scheme, supportedAuthSchemes) {
+	if data.IsIn(scheme, supportedAuthSchemes) {
 		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(error.JsonError{ErrorMessage: "Unsupported authorization scheme"})
+		json.NewEncoder(w).Encode(jsonerror.Error{ErrorMessage: "Unsupported authorization scheme"})
 	}
 	jwtToken := splitHeader[1]
 	token, err := client.VerifyIDToken(context.Background(), jwtToken)
 	if err != nil {
 		w.WriteHeader(http.StatusForbidden)
-		json.NewEncoder(w).Encode(error.JsonError{ErrorMessage: "Access Forbidden"})
+		json.NewEncoder(w).Encode(jsonerror.Error{ErrorMessage: "Access Forbidden"})
 	}
 	jsonToken, err := json.Marshal(token)
 	if err != nil {
 		log.Debugf("unable to convert jwt token into json.")
 		w.WriteHeader(http.StatusForbidden)
-		json.NewEncoder(w).Encode(error.JsonError{ErrorMessage: "Access Forbidden"})
+		json.NewEncoder(w).Encode(jsonerror.Error{ErrorMessage: "Access Forbidden"})
 	}
-	r.Header.Set("user-token", string(jsonToken))
+	r.Header.Set(aH.GetTokenHeader(), string(jsonToken))
 }

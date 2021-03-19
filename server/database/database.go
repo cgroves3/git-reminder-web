@@ -5,14 +5,13 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 	log "github.com/sirupsen/logrus"
 	"os"
 )
 
-var (
-	Db *sql.DB
-)
+var Db *sqlx.DB
 
 func InitDb(connectionString string) error{
 	if len(connectionString) == 0 {
@@ -20,7 +19,7 @@ func InitDb(connectionString string) error{
 	}
 	log.Debugf("Opening database...")
 	var err error
-	Db, err = sql.Open("postgres", connectionString)
+	Db, err = sqlx.Open("postgres", connectionString)
 	if err != nil {
 		log.Debugf("Unable to open database with the connection string=%s", err)
 		return err
@@ -90,20 +89,17 @@ func ReadDbConfig(filePath string) (DatabaseConfiguration, error) {
 	if err != nil {
 		errorMsg := fmt.Sprintf("Error opening %s:\n %s", dbConfigFile, err)
 		log.Fatalf(errorMsg)
-		log.Fatalf(errorMsg)
 		return dbConfig, errors.New(errorMsg)
 	}
 	err = json.NewDecoder(f).Decode(&dbConfig)
 	if err != nil {
 		errorMsg := fmt.Sprintf("Error decoding %s:\n %s", dbConfigFile, err)
 		log.Fatalf(errorMsg)
-		log.Fatalf(errorMsg)
 		return dbConfig, errors.New(errorMsg)
 	}
 	err = f.Close()
 	if err != nil {
 		errorMsg := fmt.Sprintf("Error closing %s:\n %s", dbConfigFile, err)
-		log.Fatalf(errorMsg)
 		log.Fatalf(errorMsg)
 		return dbConfig, errors.New(errorMsg)
 	}

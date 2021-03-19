@@ -1,5 +1,5 @@
-package error
+package jsonerror
 
-type JsonError struct {
+type Error struct {
 	ErrorMessage string `json:"error_message"`
 }
