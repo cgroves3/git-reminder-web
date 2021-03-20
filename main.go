@@ -2,8 +2,12 @@ package main
 
 import (
 	firebase "firebase.google.com/go/v4"
+	"flag"
 	"fmt"
+	"git-reminder/server/api/external"
+	"git-reminder/server/api/integration"
 	"git-reminder/server/api/user"
+	"git-reminder/server/database"
 	"git-reminder/server/firebaseapp"
 	"git-reminder/server/middleware"
 	log "github.com/sirupsen/logrus"
@@ -55,21 +59,21 @@ func main() {
 
 	var err error
 
-	//Setup database connection
-	//var databaseConfigFilePath string
-	//usage := "File path of the database configuration used to connect to the database."
-	//dbConfigFilePath := path.Join(getConfigPath(), "database.json")
-	//flag.StringVar(&databaseConfigFilePath, "databaseConfig", dbConfigFilePath, usage)
-	//flag.Parse()
-	//databaseConfig, err := database.ReadDbConfig(databaseConfigFilePath)
-	//if err != nil {
-	//	log.Debugf("Unable to read database configuration: %s", err)
-	//}
-	//err = databaseConfig.Validate()
-	//if err != nil {
-	//	log.Debugf("Invalid database configuration: %s", err)
-	//}
-	//database.InitDb(databaseConfig.ConnectionString())
+	// Setup database connection
+	var databaseConfigFilePath string
+	usage := "File path of the database configuration used to connect to the database."
+	dbConfigFilePath := path.Join(getConfigPath(), "database.json")
+	flag.StringVar(&databaseConfigFilePath, "databaseConfig", dbConfigFilePath, usage)
+	flag.Parse()
+	databaseConfig, err := database.ReadDbConfig(databaseConfigFilePath)
+	if err != nil {
+		log.Debugf("Unable to read database configuration: %s", err)
+	}
+	err = databaseConfig.Validate()
+	if err != nil {
+		log.Debugf("Invalid database configuration: %s", err)
+	}
+	database.InitDb(databaseConfig.ConnectionString())
 
 	// Initialize firebase App
 	firebaseOptionPath := path.Join(getConfigPath(), "firebaseApp.json")
@@ -84,7 +88,8 @@ func main() {
 	router := mux.NewRouter()
 	webDir := fmt.Sprintf("%s/web", projectName)
 	fileServer := http.FileServer(http.Dir(webDir))
-
+	router.Handle("/api/linked_accounts", middleware.NewLogger(external.NewLinkedAccountHandler()))
+	router.Handle("/api/integrations", middleware.NewLogger(integration.NewIntegrationHandler()))
 	router.Handle("/api/users", middleware.NewLogger(user.NewUserHandler()))
 	router.Handle("/", fileServer)
 	port := ":8080"

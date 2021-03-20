@@ -16,6 +16,10 @@ type AuthHandler struct {
 	handler http.Handler
 }
 
+func NewAuthHandler(handleToWrap http.Handler) *AuthHandler {
+	return &AuthHandler{handleToWrap}
+}
+
 func (aH *AuthHandler) GetTokenHeader() string {
 	return "user-token"
 }

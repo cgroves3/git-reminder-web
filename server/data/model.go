@@ -38,9 +38,10 @@ func IsIn(target string, array []string) bool {
 }
 
 type Integration struct {
-	Id   IntegrationType `json:"id" db:"integration_id"`
-	Name string          `json:"name" db:"integration"`
+	Id   IntegrationType `db:"integration_id" json:"id"`
+	Name string          `db:"integration" json:"name"`
 }
+
 type Integrations struct {
 	Integrations []Integration `json:"integrations"`
 }

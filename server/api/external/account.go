@@ -13,7 +13,11 @@ import (
 
 type LinkedAccountHandler struct{}
 
-func (aH *LinkedAccountHandler) ServeHttp(w http.ResponseWriter, r *http.Request) {
+func NewLinkedAccountHandler() *LinkedAccountHandler {
+	return &LinkedAccountHandler{}
+}
+
+func (aH *LinkedAccountHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	var token auth.Token
 	authHandler := middleware.AuthHandler{}
 	tokenHeader := r.Header.Get(authHandler.GetTokenHeader())
@@ -26,11 +30,11 @@ func (aH *LinkedAccountHandler) ServeHttp(w http.ResponseWriter, r *http.Request
 		json.NewEncoder(w).Encode(errMsg)
 		return
 	}
-	switch (r.Method) {
+	switch r.Method {
 	case http.MethodGet:
-		accounts, err := aH.GetAccounts(token.UID)
+		accounts, err := aH.getAccounts(token.UID)
 		if err != nil {
-			log.Warnf("Unable to execute query=%s", err)
+			log.Warnf("Error getting accounts=%s", err)
 			w.WriteHeader(http.StatusInternalServerError)
 			errMsg := jsonerror.Error{ErrorMessage: "unable to get linked accounts."}
 			json.NewEncoder(w).Encode(errMsg)
@@ -41,7 +45,7 @@ func (aH *LinkedAccountHandler) ServeHttp(w http.ResponseWriter, r *http.Request
 	}
 }
 
-func (aH *LinkedAccountHandler) GetAccounts(userId string) (*[]data.LinkedAccount, error) {
+func (aH *LinkedAccountHandler) getAccounts(userId string) (*[]data.LinkedAccount, error) {
 	//Get existing linked accounts
 	query := "select user_id, integration_id, user_login, avatar_url from get_linked_accounts($1)"
 	var accounts []data.LinkedAccount
