@@ -12,7 +12,7 @@ class Home extends Component<OnClickProps> {
         return (
             <LandingTemplate onToggleButtonClicked={this.props.onToggleButtonClicked}>
                 <h1 className={[styles.tag_line, styles.horizontally_centered].join(' ')}>
-                    Car care on your schedule.
+                    &lt;Insert Tag line here&gt;
                 </h1>
             </LandingTemplate>
         )

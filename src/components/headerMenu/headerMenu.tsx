@@ -5,7 +5,8 @@ class HeaderMenu extends React.Component {
     render() {
         return (
             <ul>
-                <li><Link to="/services">Services and Pricing</Link></li>
+                <li><Link to="/features">Features</Link></li>
+                <li><Link to="/pricing">Pricing</Link></li>
             </ul>
         )
     }

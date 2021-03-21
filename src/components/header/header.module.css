@@ -7,6 +7,7 @@
 
 .logo__svg {
     margin: auto 10px auto 10px;
+    width: max-content;
 }
 
 .header {
@@ -30,4 +31,5 @@
 .header__children {
     margin: auto 10px;
     width: 100%;
+    height: inherit;
 }
