@@ -1,0 +1,17 @@
+.footer {
+    background: #00acc1ff;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.footer > a{
+    text-decoration: none;
+    color: white;
+    margin: auto 10px;
+}
+
+.footer > a:hover{
+    text-decoration: underline;
+}

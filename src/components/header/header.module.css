@@ -1,0 +1,33 @@
+.logo {
+    display: flex;
+    height: 100%;
+    width: fit-content;
+    margin: auto 0;
+}
+
+.logo__svg {
+    margin: auto 10px auto 10px;
+}
+
+.header {
+    display: flex;
+    margin: 0;
+    padding: 0% 10% 0% 10%;
+    height: 70px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #e5e9ed;
+}
+
+.header__group {
+    display: flex;
+    float: right;
+    height: 100%;
+    margin: auto 0;
+    width: 100%;
+}
+
+.header__children {
+    margin: auto 10px;
+    width: 100%;
+}
