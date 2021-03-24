@@ -14,7 +14,7 @@ class HeaderMenu extends React.Component {
                     </ul>
                 </nav>
                 <div className={styles.headerMenu__signup}>
-                    <Link to="/login"><button>Login</button></Link>
+                    <Link to="/signin"><button>Sign In</button></Link>
                     <Link to="/signup"><button>Sign Up</button></Link>
                 </div>
             </div>

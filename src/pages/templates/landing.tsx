@@ -29,10 +29,6 @@ interface OnClickProps {
 
 class LandingTemplate extends React.Component<OnClickProps> {
 
-    constructor(props: Readonly<OnClickProps>) {
-        super(props);
-    }
-
     render()
     {
         return (
