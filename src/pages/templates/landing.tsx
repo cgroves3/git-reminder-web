@@ -6,7 +6,6 @@ import ToggleButton from "../../components/sideDrawer/toggleButton";
 import Footer from "../../components/footer/footer";
 import HeaderMenu from "../../components/headerMenu/headerMenu";
 import firebase from "firebase";
-import * as firebaseui from "firebaseui";
 
 var firebaseConfig = {
     apiKey: "AIzaSyAVZiRpvswAn6pG_CUQCo-VOkLLkZuGaDE",
@@ -18,21 +17,9 @@ var firebaseConfig = {
     measurementId: "G-4LR6X31G5N"
 };
 
-
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig)
 firebase.analytics();
-
-// Initialize the FirebaseUI Widget using Firebase.
-let ui = new firebaseui.auth.AuthUI(firebase.auth());
-
-ui.start('#firebaseui-auth-container', {
-    signInOptions: [
-        firebase.auth.EmailAuthProvider.PROVIDER_ID,
-        firebase.auth.GoogleAuthProvider.PROVIDER_ID
-    ],
-    // Other config options...
-});
 
 const logoPath = require("../../logo.svg")
 
@@ -45,7 +32,6 @@ class LandingTemplate extends React.Component<OnClickProps> {
     constructor(props: Readonly<OnClickProps>) {
         super(props);
     }
-
 
     render()
     {

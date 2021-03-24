@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom";
 import React from "react";
 import styles from "./headerMenu.module.css"
+import firebase from "firebase";
 
 class HeaderMenu extends React.Component {
     render() {

@@ -13,8 +13,6 @@ class Home extends Component<OnClickProps> {
             <LandingTemplate onToggleButtonClicked={this.props.onToggleButtonClicked}>
                 <h1 className={[styles.tag_line, styles.horizontally_centered].join(' ')}>
                     &lt;Insert Tag line here&gt;
-                    <div id="firebaseui-auth-container"></div>
-                    <div id="loader">Loading...</div>
                 </h1>
             </LandingTemplate>
         )
