@@ -5,10 +5,8 @@ import {DesktopBreakpoint, PhoneBreakpoint} from "../../components/breakpoints/b
 import ToggleButton from "../../components/sideDrawer/toggleButton";
 import Footer from "../../components/footer/footer";
 import HeaderMenu from "../../components/headerMenu/headerMenu";
-import firebase from 'firebase';
-import * as firebaseui from 'firebaseui';
-
-const logoPath = require("../../logo.svg")
+import firebase from "firebase";
+import * as firebaseui from "firebaseui";
 
 var firebaseConfig = {
     apiKey: "AIzaSyAVZiRpvswAn6pG_CUQCo-VOkLLkZuGaDE",
@@ -24,9 +22,19 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig)
 firebase.analytics();
+
 // Initialize the FirebaseUI Widget using Firebase.
 let ui = new firebaseui.auth.AuthUI(firebase.auth());
 
+ui.start('#firebaseui-auth-container', {
+    signInOptions: [
+        firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID
+    ],
+    // Other config options...
+});
+
+const logoPath = require("../../logo.svg")
 
 interface OnClickProps {
     onToggleButtonClicked: (event: React.MouseEvent<HTMLButtonElement>) => void
@@ -36,17 +44,6 @@ class LandingTemplate extends React.Component<OnClickProps> {
 
     constructor(props: Readonly<OnClickProps>) {
         super(props);
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-
-        ui.start('#firebaseui-auth-container', {
-            signInOptions: [
-                firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                firebase.auth.GoogleAuthProvider.PROVIDER_ID
-            ],
-            // Other config options...
-        });
-
     }
 
 
@@ -55,20 +52,16 @@ class LandingTemplate extends React.Component<OnClickProps> {
         return (
             <div>
                 <Header logo={<img className={styles.img__logo} src={logoPath} alt={"Git Reminder"}/>}>
-                    <nav className={styles.header__nav}>
-                        <DesktopBreakpoint>
-                            <HeaderMenu/>
-                            <div id="firebaseui-auth-container"></div>
-                            <div id="loader">Loading...</div>
-                        </DesktopBreakpoint>
-                        <PhoneBreakpoint>
-                            <div className={styles.toggleButton__div}>
-                                <ToggleButton onClick={this.props.onToggleButtonClicked}/>
-                            </div>
-                        </PhoneBreakpoint>
-                    </nav>
+                    <DesktopBreakpoint>
+                        <HeaderMenu/>
+                    </DesktopBreakpoint>
+                    <PhoneBreakpoint>
+                        <div className={styles.toggleButton__div}>
+                            <ToggleButton onClick={this.props.onToggleButtonClicked}/>
+                        </div>
+                    </PhoneBreakpoint>
                 </Header>
-                    {this.props.children}
+                {this.props.children}
                 <Footer></Footer>
             </div>
         )

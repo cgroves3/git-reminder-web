@@ -20,15 +20,7 @@
     border-bottom-color: #e5e9ed;
 }
 
-.header__group {
-    display: flex;
-    float: right;
-    height: 100%;
-    margin: auto 0;
-    width: 100%;
-}
-
-.header__children {
+.header_children {
     margin: auto 10px;
     width: 100%;
     height: inherit;

@@ -33,7 +33,7 @@
 .side-drawer a {
     text-decoration: none;
     color: black;
-    font-size: 1.2rem;
+    /*font-size: 1.2rem;*/
     width: 100%;
     border: #e5e9ed;
     border-width: thin;

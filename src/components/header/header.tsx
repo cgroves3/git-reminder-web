@@ -10,10 +10,8 @@ const Header: React.FC<PropsWithChildren<{logo: JSX.Element}>> = ({logo, childre
                 {logo}
             </div>
         </Link>
-        <div className={styles.header__group}>
-            <div className={styles.header__children}>
-                {children}
-            </div>
+        <div className={styles.header_children}>
+            {children}
         </div>
     </header>;
 }
