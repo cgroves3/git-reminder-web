@@ -9,9 +9,11 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    width: 150px;
 }
 
+.headerMenu__signup > a {
+    margin: 0 10px;
+}
 
 .nav a{
     color: black;

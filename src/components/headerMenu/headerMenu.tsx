@@ -1,23 +1,22 @@
-import {Link} from "react-router-dom";
+// import {Link} from "react-router-dom";
 import React from "react";
 import styles from "./headerMenu.module.css"
-import firebase from "firebase";
+import { Button, MenuList, Link } from '@material-ui/core';
+import Login from "../../pages/login/login";
 
 class HeaderMenu extends React.Component {
     render() {
         return (
-            <div className={styles.headerMenu}>
-                <nav className={styles.nav}>
-                    <ul>
-                        <li><Link to="/features">Features</Link></li>
-                        <li><Link to="/pricing">Pricing</Link></li>
-                    </ul>
-                </nav>
+            <MenuList className={styles.headerMenu}>
+                {/*<div className={styles.headerMenu__signup}>*/}
+                {/*    <MenuItem><Link>Features</Link></MenuItem>*/}
+                {/*    <MenuItem><Link>Pricing</Link></MenuItem>*/}
+                {/*</div>*/}
                 <div className={styles.headerMenu__signup}>
-                    <Link to="/signin"><button>Sign In</button></Link>
-                    <Link to="/signup"><button>Sign Up</button></Link>
+                    <Link component={""}><Button>Sign In</Button></Link>
+                    <Link><Button variant={"contained"} color={"primary"}>Sign Up</Button></Link>
                 </div>
-            </div>
+            </MenuList>
         )
     }
 }
