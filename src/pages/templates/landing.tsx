@@ -23,11 +23,18 @@ firebase.analytics();
 
 const logoPath = require("../../logo.svg")
 
-interface OnClickProps {
-    onToggleButtonClicked: (event: React.MouseEvent<HTMLButtonElement>) => void
+
+interface SideDrawerState {
+    sideDrawerOpen: boolean
 }
 
-class LandingTemplate extends React.Component<OnClickProps> {
+class LandingTemplate extends React.Component {
+
+    drawerToggleClickHandler = () => {
+        this.setState((prevState: SideDrawerState) => {
+            return {sideDrawerOpen: !prevState.sideDrawerOpen}
+        })
+    }
 
     render()
     {
@@ -39,7 +46,7 @@ class LandingTemplate extends React.Component<OnClickProps> {
                     </DesktopBreakpoint>
                     <PhoneBreakpoint>
                         <div className={styles.toggleButton__div}>
-                            <ToggleButton onClick={this.props.onToggleButtonClicked}/>
+                            <ToggleButton onClick={this.drawerToggleClickHandler}/>
                         </div>
                     </PhoneBreakpoint>
                 </Header>

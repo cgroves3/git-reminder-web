@@ -2,15 +2,11 @@ import React, {Component} from 'react';
 import styles from "./home.module.css";
 import LandingTemplate from "../../pages/templates/landing";
 
-interface OnClickProps {
-    onToggleButtonClicked: (event: React.MouseEvent<HTMLButtonElement>) => void
-}
-
-class Home extends Component<OnClickProps> {
+class Home extends Component {
     render()
     {
         return (
-            <LandingTemplate onToggleButtonClicked={this.props.onToggleButtonClicked}>
+            <LandingTemplate>
                 <h1 className={[styles.tag_line, styles.horizontally_centered].join(' ')}>
                     &lt;Insert Tag line here&gt;
                 </h1>

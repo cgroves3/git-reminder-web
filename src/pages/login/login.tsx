@@ -1,14 +1,24 @@
 import React from "react";
-import LandingTemplate from "../templates/landing";
+import { FormControl, Input, InputLabel } from '@material-ui/core'
+import styles from "./login.module.css"
 
-interface OnClickProps {
-    onToggleButtonClicked: (event: React.MouseEvent<HTMLButtonElement>) => void
-}
-
-class Login extends React.Component<OnClickProps> {
+class Login extends React.Component {
     render() {
         return (
-            <LandingTemplate onToggleButtonClicked={this.props.onToggleButtonClicked}></LandingTemplate>
+            <div className={ styles.login_form_container }>
+                <div className={ styles.login_form_page }>
+                    <div className={ styles.login_form }>
+                        <FormControl className={ styles.form_control }>
+                            <InputLabel>Email</InputLabel>
+                            <Input required={true}></Input>
+                        </FormControl>
+                        <FormControl className={ styles.form_control }>
+                            <InputLabel>Password</InputLabel>
+                            <Input required={true}></Input>
+                        </FormControl>
+                    </div>
+                </div>
+            </div>
         )
     }
 }
