@@ -1,5 +1,7 @@
-login_form_page {
-    height: 100%;
+
+.form_control {
+    margin: 0px 0px 20px 0px !important;
+    width: 100% !important;
 }
 
 .login_form_container {
@@ -7,7 +9,10 @@ login_form_page {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: inherit;
+    width: 25%;
+    margin: 30px auto 0px auto;
+    box-shadow: 0 4px 8px 0 darkgray;
+    border-radius: 5px;
 }
 
 .login_form {
@@ -15,12 +20,13 @@ login_form_page {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 3px;
-    width: 40%;
+    width: 80%;
 }
 
-.form_control {
-    padding-top: 20px;
+.login_header {
+    text-align: center;
+}
+
+.login_button {
+    margin-top: 10px !important;
 }

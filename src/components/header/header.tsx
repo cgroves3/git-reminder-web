@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {PropsWithChildren, ReactNode} from "react";
+import {PropsWithChildren} from "react";
 import styles from "./header.module.css"
 import {Link} from "react-router-dom";
 
