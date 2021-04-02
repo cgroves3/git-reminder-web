@@ -36,3 +36,11 @@
     top: 50%;
     left: 50%;
 }
+
+.display_block {
+    display: block !important;
+}
+
+.hidden {
+    display: none !important;
+}
