@@ -20,4 +20,4 @@ class CloseButton extends React.Component<OnClickProps> {
     }
 }
 
-export default  CloseButton
+export default CloseButton

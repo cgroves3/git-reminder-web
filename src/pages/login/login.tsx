@@ -3,17 +3,26 @@ import { useHistory } from 'react-router-dom'
 import {Button, CircularProgress, FormControl, Input, InputLabel} from '@material-ui/core'
 import styles from "./login.module.css"
 import firebase from "firebase";
+import CloseButton from "../../components/sideDrawer/closeButton";
 
 interface State {
     loaderHidden: boolean,
+    errorHidden: boolean,
+    email: string,
+    password: string,
     error: string
 }
 
 class Login extends React.Component<any, State> {
 
     constructor(props: any) {
-        super(props);
-        this.state = {loaderHidden: true, error: ""}
+        super(props)
+        this.state = {loaderHidden: true, email: "", password: "", error: "", errorHidden: true}
+
+        this.handleErrorClose = this.handleErrorClose.bind(this)
+        this.handleEmailChange = this.handleEmailChange.bind(this)
+        this.handlePasswordChange = this.handlePasswordChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     // RFC 5322 compliant regex http://emailregex.com/
@@ -21,14 +30,21 @@ class Login extends React.Component<any, State> {
     EmailName = "email"
     PasswordName = "password"
 
+    handleEmailChange(event: React.ChangeEvent<HTMLInputElement>) {
+        this.setState({ email: event.target.value })
+    }
+
+    handlePasswordChange(event: React.ChangeEvent<HTMLInputElement>) {
+        this.setState({ password: event.target.value })
+    }
+
     handleSubmit(event: React.ChangeEvent<HTMLFormElement>) {
         event.preventDefault()
         this.setState({loaderHidden: true})
-        let emailInput = event.target.children.namedItem(this.EmailName)
-        let pwdInput = event.target.children.namedItem(this.EmailName)
-        if (emailInput != null && pwdInput != null && emailInput.textContent != null && pwdInput.textContent != null) {
-            let promise = firebase.auth().signInWithEmailAndPassword(emailInput.textContent, pwdInput.textContent)
-            promise.then((credential: firebase.auth.UserCredential) => {
+        if (this.state.email !== "" && this.state.password !== "") {
+            let promise = firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+            promise.then(
+                (credential: firebase.auth.UserCredential) => {
                     let history = useHistory();
                     history.push("/dashboard", credential)
                 }
@@ -37,9 +53,14 @@ class Login extends React.Component<any, State> {
                 if (error.code === "auth/user-disabled") {
                     errorMessage = "User account disabled."
                 }
-                this.setState({ error: errorMessage })
+                this.setState({ error: errorMessage,  errorHidden: false})
+                console.log("incorrect user or password.")
             })
         }
+    }
+
+    handleErrorClose() {
+        this.setState({errorHidden: true})
     }
 
     render() {
@@ -50,15 +71,17 @@ class Login extends React.Component<any, State> {
                     <div className={styles.login_header}>
                         <h1>Sign in to Git Reminder</h1>
                     </div>
-                    <div>{this.state.error}</div>
+                    <div className={[styles.login_error, (this.state.errorHidden ? styles.hidden : styles.display_block) ].join(" ")}>
+                        {this.state.error}<CloseButton onClick={this.handleErrorClose}/>
+                    </div>
                     <form className={styles.login_form} onSubmit={this.handleSubmit}>
                         <FormControl className={styles.form_control}>
                             <InputLabel>Email</InputLabel>
-                            <Input type={"email"} required={true} autoComplete={"email"} id={this.EmailName}></Input>
+                            <Input type={"email"} required={true} autoComplete={"email"} id={this.EmailName} onChange={this.handleEmailChange}></Input>
                         </FormControl>
                         <FormControl className={styles.form_control}>
                             <InputLabel>Password</InputLabel>
-                            <Input type={"password"} required={true} id={this.PasswordName}></Input>
+                            <Input type={"password"} required={true} id={this.PasswordName} onChange={this.handlePasswordChange}></Input>
                         </FormControl>
                         <Button type={"submit"} className={[styles.form_control, styles.login_button].join(' ')} variant={"contained"} color={"primary"}>Sign In</Button>
                     </form>
