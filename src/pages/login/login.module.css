@@ -53,3 +53,13 @@
     padding: 10px;
     border-color: indianred;
 }
+
+.error_close {
+    width: 50px;
+    height: 50px;
+}
+
+.login_error_message {
+    display: flex;
+    align-items: center;
+}

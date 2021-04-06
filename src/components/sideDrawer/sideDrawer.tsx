@@ -21,7 +21,7 @@ class SideDrawer extends React.Component<OnCloseProps> {
         return (
             <div className={drawClasses.join(' ')}>
                 <div className={styles['side-drawer__div']}>
-                    <CloseButton onClick={this.props.onClose}></CloseButton>
+                    <CloseButton x={-255} y={347} height={100} width={100} onClick={this.props.onClose}></CloseButton>
                     <nav>
                         <HeaderMenu/>
                     </nav>

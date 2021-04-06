@@ -72,7 +72,7 @@ class Login extends React.Component<any, State> {
                         <h1>Sign in to Git Reminder</h1>
                     </div>
                     <div className={[styles.login_error, (this.state.errorHidden ? styles.hidden : styles.display_block) ].join(" ")}>
-                        {this.state.error}<CloseButton onClick={this.handleErrorClose}/>
+                        <div className={styles.login_error_message}>{this.state.error}<CloseButton x={-280} y={322} height={150} width={150} onClick={this.handleErrorClose}/></div>
                     </div>
                     <form className={styles.login_form} onSubmit={this.handleSubmit}>
                         <FormControl className={styles.form_control}>
