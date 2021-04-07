@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import logo from './logo.svg';
-import Home from './pages/home/home';
+import Home from "./pages/home/home";
 import Login from "./pages/login/login";
+import SignUp from "./pages/signup/signup";
 import './App.css';
 import Backdrop from "./components/backdrop/backdrop";
 import SideDrawer from "./components/sideDrawer/sideDrawer";
@@ -41,6 +42,9 @@ class App extends Component {
             </Route>
             <Route exact path="/signin">
               <Login/>
+            </Route>
+            <Route exact path="/signup">
+              <SignUp/>
             </Route>
           </Switch>
           <SideDrawer onClose={this.sideDrawerCloseClickHandler} show={this.state.sideDrawerOpen}/>

@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from "./closeButton.module.css";
-import internal from "stream";
 
 interface OnClickProps {
     onClick: (event: React.MouseEvent<HTMLButtonElement>) => void

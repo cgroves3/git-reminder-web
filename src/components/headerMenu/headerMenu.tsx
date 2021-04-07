@@ -12,7 +12,7 @@ class HeaderMenu extends React.Component {
                 {/*</div>*/}
                 <div className={styles.headerMenu__signup}>
                     <Link href={"/signin"}><Button>Sign In</Button></Link>
-                    <Link><Button variant={"contained"} color={"primary"}>Sign Up</Button></Link>
+                    <Link href={"/signup"}><Button variant={"contained"} color={"primary"}>Sign Up</Button></Link>
                 </div>
             </MenuList>
         )
