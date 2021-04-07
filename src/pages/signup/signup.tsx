@@ -54,8 +54,7 @@ class SignUp extends React.Component<any, State> {
                     displayName: this.state.fullName,
                     email: this.state.email,
                     password: this.state.password
-                }),
-                mode:
+                })
             };
             let promise = fetch(`${ApiSettings.host}:${ApiSettings.port}/api/users`, requestOptions)
             promise.then(
