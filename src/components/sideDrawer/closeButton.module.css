@@ -1,15 +1,15 @@
-.close-button {
+.close_button {
     width: 20px;
     height: 20px;
     cursor: pointer;
     background: transparent;
     border: none;
     padding: 0;
-    margin: 15px;
+    margin: 0px 0px 0px 30px;
     align-self: flex-end;
 }
 
-.close-button__svg {
+.close_button__svg {
     display: block;
     width: 100%;
     height: 100%;

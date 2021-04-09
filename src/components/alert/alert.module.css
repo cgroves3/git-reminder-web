@@ -1,0 +1,23 @@
+.error {
+    width: 300px;
+    border-radius: 5px;
+    background: lightpink;
+    margin: 10px auto;
+    padding: 1px;
+    border-color: indianred;
+}
+
+.error_message {
+    display: flex;
+    align-items: center;
+    margin: 10px auto;
+    justify-content: center;
+}
+
+.display_block {
+    display: block !important;
+}
+
+.hidden {
+    display: none !important;
+}

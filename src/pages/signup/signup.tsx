@@ -2,8 +2,8 @@ import React, {useState} from 'react'
 import {useHistory} from "react-router-dom";
 import { Button, CircularProgress, FormControl, Input, InputLabel} from "@material-ui/core";
 import styles from "../login/login.module.css";
-import CloseButton from "../../components/sideDrawer/closeButton";
 import ApiSettings from "../../ApiSettings";
+import Alert from "../../components/alert/alert";
 
 function SignUp() {
     const history = useHistory();
@@ -69,6 +69,7 @@ function SignUp() {
                     }
                 }
             ).catch((error) => {
+                setLoaderShown(false)
                 setErrorMessage("Error creating new user account.")
                 setErrorShown(true)
                 console.log(`Received error=${error}`)
@@ -87,9 +88,7 @@ function SignUp() {
                 <div className={styles.login_header}>
                     <h1>Sign up for Git Reminder</h1>
                 </div>
-                <div className={[styles.login_error, (errorShown ? styles.display_block : styles.hidden) ].join(" ")}>
-                    <div className={styles.login_error_message}>{errorMessage}<CloseButton x={-280} y={322} height={150} width={150} onClick={handleErrorClose}/></div>
-                </div>
+                <Alert displayed={errorShown} message={errorMessage} onClick={handleErrorClose}></Alert>
                 <form className={styles.login_form} onSubmit={handleSubmit}>
                     <FormControl className={styles.form_control}>
                         <InputLabel>Full Name</InputLabel>

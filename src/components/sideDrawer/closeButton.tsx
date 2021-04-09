@@ -13,8 +13,8 @@ class CloseButton extends React.Component<OnClickProps> {
 
     render() {
         return (
-            <button className={styles['close-button']} onClick={this.props.onClick}>
-                <svg className={styles['close-button__svg']}
+            <button className={styles.close_button} onClick={this.props.onClick}>
+                <svg className={styles.close_button__svg}
                      viewBox={`${this.props.x} ${this.props.y} ${this.props.width} ${this.props.height}`}>
                     <path
                         d="M-160.4 434.2l-37.2-37.2 37.1-37.1-7-7-37.1 37.1-37.1-37.1-7 7 37.1 37.1-37.2 37.2 7.1 7 37.1-37.2 37.2 37.2"/>

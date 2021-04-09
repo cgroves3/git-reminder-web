@@ -26,6 +26,7 @@
 
 .login_header {
     text-align: center;
+    padding: 10px 0px 10px 0;
 }
 
 .login_button {
@@ -46,21 +47,7 @@
     display: none !important;
 }
 
-.login_error {
-    width: 300px;
-    border-radius: 5px;
-    background: lightpink;
-    margin: 10px auto;
-    padding: 1px;
-    border-color: indianred;
-}
-
 .error_close {
     width: 50px;
     height: 50px;
-}
-
-.login_error_message {
-    display: flex;
-    align-items: center;
 }
