@@ -37,11 +37,17 @@ function Login() {
             }
             ).catch((error) => {
                 setLoaderShown(false)
-                let errorMessage = "Incorrect user or password."
-                if (error.code === "auth/user-disabled") {
-                    errorMessage = "User account disabled."
+                switch (error.code) {
+                    case "auth/invalid-email":
+                        setErrorMessage("Invalid email address.")
+                        break
+                    case "auth/user-disabled":
+                        setErrorMessage("User account disabled.")
+                        break
+                    default:
+                        setErrorMessage("Incorrect user or password.")
+                        break
                 }
-                setErrorMessage(errorMessage)
                 setErrorShown(true)
             })
         }
@@ -71,6 +77,8 @@ function Login() {
                     </FormControl>
                     <Button type={"submit"} className={[styles.form_control, styles.login_button].join(' ')}
                             variant={"contained"} color={"primary"}>Sign In</Button>
+                    <Button className={[styles.form_control, styles.login_button].join(' ')}
+                            variant={"outlined"} color={"secondary"} href={"/password_reset"}>Forgot your password?</Button>
                 </form>
             </div>
         </div>

@@ -7,6 +7,7 @@ import SignUp from "./pages/signup/signup";
 import './App.css';
 import Backdrop from "./components/backdrop/backdrop";
 import SideDrawer from "./components/sideDrawer/sideDrawer";
+import PasswordReset from "./pages/passwordReset/passwordReset";
 
 interface SideDrawerState {
   sideDrawerOpen: boolean
@@ -45,6 +46,9 @@ class App extends Component {
             </Route>
             <Route exact path="/signup">
               <SignUp/>
+            </Route>
+            <Route exact path="/password_reset">
+              <PasswordReset/>
             </Route>
           </Switch>
           <SideDrawer onClose={this.sideDrawerCloseClickHandler} show={this.state.sideDrawerOpen}/>
