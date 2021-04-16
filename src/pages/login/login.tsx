@@ -53,10 +53,6 @@ function Login() {
         }
     }
 
-    const handleErrorClose = () => {
-        setErrorShown(false)
-    }
-
     return (
         <div>
             <CircularProgress id={"loader"}
@@ -65,7 +61,7 @@ function Login() {
                 <div className={styles.login_header}>
                     <h1>Sign in to Git Reminder</h1>
                 </div>
-                <Alert displayed={errorShown} message={errorMessage} onClick={handleErrorClose}></Alert>
+                <Alert displayed={errorShown} message={errorMessage} dismissible={true} severity={"error"}></Alert>
                 <form className={styles.login_form} onSubmit={handleSubmit}>
                     <FormControl className={styles.form_control}>
                         <InputLabel>Email</InputLabel>

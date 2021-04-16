@@ -1,10 +1,17 @@
 .error {
-    width: 300px;
-    border-radius: 5px;
-    background: lightpink;
+    border-radius: 4px;
     margin: 10px auto;
     padding: 1px;
-    border-color: indianred;
+}
+
+.alert_success {
+    color: rgb(30, 70, 32);
+    background: rgb(237, 247, 237);
+}
+
+.alert_error {
+    color: rgb(97, 26, 21);
+    background: lightpink;
 }
 
 .error_message {

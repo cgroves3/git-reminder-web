@@ -77,10 +77,6 @@ function SignUp() {
         }
     }
 
-    const handleErrorClose = () => {
-        setErrorShown(false)
-    }
-
     return (
         <div>
             <CircularProgress id={"loader"} className={[styles.loader, (loaderShown ? styles.display_block : styles.hidden) ].join(" ")}/>
@@ -88,7 +84,7 @@ function SignUp() {
                 <div className={styles.login_header}>
                     <h1>Sign up for Git Reminder</h1>
                 </div>
-                <Alert displayed={errorShown} message={errorMessage} onClick={handleErrorClose}></Alert>
+                <Alert displayed={errorShown} message={errorMessage} dismissible={true} severity={"error"}></Alert>
                 <form className={styles.login_form} onSubmit={handleSubmit}>
                     <FormControl className={styles.form_control}>
                         <InputLabel>Full Name</InputLabel>
